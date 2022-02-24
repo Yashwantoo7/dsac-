@@ -1,0 +1,38 @@
+fermat's little theorem states  that if p is prime number, then for any integer a, the number a**p-a is an integer
+multiple of p.
+a**p == a(modp)
+
+if a is not divisible by p, fermat's little theorem is equivalent to the statement that a**(p-1)-1 is an
+integer multiple of p
+a**(p-1) == 1(modp)
+
+application
+modulo inverse using fermat's theorem
+
+a**p = a(modp)
+if a is not divisible by p,
+a**(p-1) == 1(modp)
+multiplying both sides by a**(-1)
+a**(p-2) == a**(-1)(modp)
+
+evaluating (a/b)%m = ((a%m)*(b**(-1)%m))%m
+
+evaluating (nCr)%p
+
+if p>n 
+1. pre calculate factorials taking modulo p.
+2. nCr%p = (fac[n]*modInverse(fac[r])%p*modInverse(fac[n-r])%p)%p
+
+Wilson's Theorem
+
+A positive integer n>1 is a prime if and only if 
+(n-1)! == -1(modn)
+or 
+(n-1)! == (n-1)(modn)
+In other words, (n-1)! is 1 less than a multiple of n.
+For example, since we know that 101 is a prime, we can conclude immediately that 100! = 101K-1 for some integer k.
+example
+calculte(25!%29)
+from wilson's theorem, we know that 28! is -1(modp). so we
+basically need to find
+[(-1)*inverse(28,29)*inverse(27,29)*inverse(26,29)]%29

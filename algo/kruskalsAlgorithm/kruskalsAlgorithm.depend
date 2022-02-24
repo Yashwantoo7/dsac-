@@ -1,0 +1,6 @@
+# depslib dependency file v1.0
+1604807777 source:d:\dsac++\algo\kruskalsalgorithm\main.cpp
+	<iostream>
+	<vector>
+	<bits/stdc++.h>
+

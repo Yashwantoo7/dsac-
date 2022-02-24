@@ -1,0 +1,5 @@
+# depslib dependency file v1.0
+1603890273 source:d:\dsac++\algo\n-queens\main.cpp
+	<iostream>
+	<vector>
+

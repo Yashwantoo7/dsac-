@@ -1,0 +1,44 @@
+#include<bits/stdc++.h>
+using namespace std;
+#define ll long long
+int a[500100],l[500100],r[500100];//l r record positions separately 
+ll suml[500100],sumr[500100];//Used to sum the prefix 
+
+int main ()
+{
+	ios::sync_with_stdio(0);
+	int n; 
+	cin>>n;
+	for(int i=1,j=0;i<=n;i++)//Select from left to right 
+	{
+		cin>>a[i];
+		j=i-1;
+		while(j>0&&a[i]<a[j]) j=l[j];//Monotonic stack to filter, if monotonicity is met, put it in 
+		l[i]=j;
+		suml[i]=suml[j]+1LL*(i-j)*a[i];
+	}
+	ll s=0;int t;// t is used to record the highest point 
+	for(int i=n,j=n+1;i>0;i--)//Select from right to left 
+	{
+		j=i+1;
+		while(j<=n&&a[i]<a[j]) j=r[j];
+		r[i]=j;
+		sumr[i]=sumr[j]+1LL*(j-i)*a[i];
+		if(suml[i]+sumr[i]-a[i]>s)//After selecting, see which position is the highest point 
+		{
+			s=suml[i]+sumr[i]-a[i];
+			t=i;
+		}
+	}
+	for(int i=t-1;i>0;i--)//Update the queue data to the left 
+	{
+		if(a[i]>a[i+1]) a[i]=a[i+1];
+	}
+	for(int i=t+1;i<=n;i++)//Update the queue data to the right 
+	{
+		if(a[i]>a[i-1]) a[i]=a[i-1];
+	}
+	for(int i=1;i<=n;i++)//Output 
+		cout<<a[i]<<" ";
+	return 0;
+}

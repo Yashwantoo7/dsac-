@@ -1,0 +1,89 @@
+#include <iostream>
+#include <bits/stdc++.h>
+using namespace std;
+
+//find a node k level above the queried node
+
+void binaryLifting(int src,int par,int up[][20],vector<int>tree[]){
+    up[src][0]=par;
+    for(int i=1;i<20;i++){
+        if(up[src][i-1]!=-1)
+            up[src][i]=up[up[src][i-1]][i-1];
+        else up[src][i]=-1;
+    }
+    
+    for(int child:tree[src]){
+        if(child!=par){
+            binaryLifting(child,src,up,tree);
+        }
+    }
+}
+
+int liftNode(int node,int k,vector<int>tree[],int up[][20]){
+    
+    if(node==-1||k==0){
+        return node;
+    }
+    for(int i=19;i>=0;i--){
+        if(k>=(1<<i)){
+            return liftNode(up[node][i],k-(1<<i),tree,up);
+        }
+    }
+}
+
+int LCA(int u,int v,vector<int>tree[],int up[][20],int lvl[]){
+    if(lvl[u]<lvl[v]){
+        swap(u,v);
+    }
+    
+    u=liftNode(u,lvl[u]-lvl[v],tree,up);
+    
+    int lo=0,hi=lvl[u];
+    while(lo!=hi){
+        int mid=(lo+hi)/2;
+        int x1=liftNode(u,mid,tree,up);
+        int x2=liftNode(v,mid,tree,up);
+        if(x1==x2){
+            hi=mid;
+        }
+        else lo=mid+1;
+    }
+    return liftNode(u,lo,tree,up);
+}
+
+void solve(){
+    int n,q;
+    cin>>n>>q;
+    cout<<n<<" "<<q<<endl;
+    vector<int>tree[n+1];
+    int up[2001][20];
+    int lvl[n+1];
+    lvl[1]=0;
+    for(int i=1;i<n;i++){
+        int u,v;
+        cin>>u>>v;
+        // cout<<u<<" "<<v<<endl;
+        lvl[v]=lvl[u]+1;
+        tree[u].push_back(v);
+        tree[v].push_back(u);
+    }
+    binaryLifting(1,-1,up,tree);
+    
+    while(q--){
+        int u,v;
+        cin>>u>>v;
+        cout<<LCA(u,v,tree,up,lvl)<<endl;
+    }
+    
+}
+
+
+int main()
+{
+   int t;
+   cin>>t;
+   while(t--){
+       solve();
+   }
+   return 0;
+}

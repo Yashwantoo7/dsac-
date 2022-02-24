@@ -1,0 +1,7 @@
+# depslib dependency file v1.0
+1603939966 source:d:\dsac++\algo\wordbreak\main.cpp
+	<iostream>
+	<string>
+	<unordered_set>
+	<vector>
+

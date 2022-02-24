@@ -1,0 +1,11 @@
+1: Prim's Algo (minimum spanning tree)
+2: Kruskals Algo (minimum spanning tree)
+3: DFS
+4: BFS
+5: Detect cycle in graph
+6: kosaraju's Algo (for strongly connected components)
+7: Dijkstra's algo (for finding shortest path)
+8: Bellman ford algo (for finding shortest path)
+9: Topological Sort (for a directed acyclic graph)
+10: flyod warshwall algo (shortest distance between every pair of vertices)
+11: dsu
